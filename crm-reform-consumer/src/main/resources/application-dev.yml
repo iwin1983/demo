@@ -1,0 +1,16 @@
+dubbo:
+  application:
+    name: crm-reform-consumer
+    shutwait: 1000
+  registry:
+    address: zookeeper://127.0.0.1:2181 # zookeeper注册中心的地址
+  protocol:
+    name: dubbo
+    port: -1
+  metadata-report:
+    address: zookeeper://127.0.0.1:2181
+  consumer:
+    retries: 0 # 服务调用重试次数，服务发布者不给重试，让服务调用者自己重试
+
+server:
+  port: 9112

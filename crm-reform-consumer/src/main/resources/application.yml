@@ -1,0 +1,18 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    generator:
+      WRITE_NUMBERS_AS_STRINGS: false
+  http:
+    multipart:
+      max-file-size: 30Mb
+      max-request-size: 30Mb
+#日志
+logging:
+  config: classpath:logback-${spring.profiles.active}.xml
+

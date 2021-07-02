@@ -1,0 +1,57 @@
+spring:
+  datasource:
+    druid:
+      stat-view-servlet:
+        url-pattern: /druid/*
+        loginUsername: test
+        loginPassword: test888888
+      web-stat-filter:
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+        url-pattern: /*
+    dynamic:
+      primary: crm #设置默认的数据源或者数据源组,默认值即为master,如果你主从默认下主库的名称就是master可不定义此项
+      datasource:
+        crm:
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/crm?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+          druid: #以下均为默认值
+            initial-size: 3
+            max-active: 8
+            min-idle: 2
+            max-wait: -1
+            min-evictable-idle-time-millis: 30000
+            max-evictable-idle-time-millis: 30000
+            time-between-eviction-runs-millis: 0
+            validation-query: select 1
+            validation-query-timeout: -1
+            test-on-borrow: false
+            test-on-return: false
+            test-while-idle: true
+            pool-prepared-statements: true
+            max-open-prepared-statements: 100
+            filters: stat
+            share-prepared-statements: true
+
+dubbo:
+  application:
+    name: crm-reform-producer
+    shutwait: 1000
+  registry:
+    address: zookeeper://127.0.0.1:2181 # 注册中心地址
+  protocol:
+    port: -1 # 随机端口号-1
+    name: dubbo
+  metadata-report:
+    address: zookeeper://127.0.0.1:2181 # dubbo-admin需要这个配置上报meta信息
+
+rpc:
+  version:
+    crm-reform: 1.0.0 # 消费者版本与生产者版本一致
+
+server:
+  port: 9111
+
+zookeeper:
+  address: 127.0.0.1:2181
